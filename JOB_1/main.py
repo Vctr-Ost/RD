@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 def requester(date: str, page: int) -> requests.models.Response:                              # Returning GET Response
     prms: dict = {'date': date, 'page': page}
-    response = requests.get('https://fake-api-vycpfa6oca-uc.a.run.app/sales', params=prms, headers={'Authorization': os.getenv('AUTH_KEY')})
+    response = requests.get(os.getenv('API_URL'), params=prms, headers={'Authorization': os.getenv('AUTH_KEY')})
     return response
 
 

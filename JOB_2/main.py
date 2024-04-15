@@ -15,16 +15,12 @@ def post_endpoint():
         file: str = f.read()                                     # Reading JSON file
         json_file: list = json.loads(file)
 
-        schema: dict = {                                          # Creating schema
-            'name': 'Purchases',
-            'type': 'record',
-            'fields': [
-                {'name': 'client', 'type': 'string'},
-                {'name': 'purchase_date', 'type': 'string'},
-                {'name': 'product', 'type': 'string'},
-                {'name': 'price', 'type': 'int'}
-            ]
-        }
+        schema: dict
+        schema_filepath = 'JOB_2/schema_avro.json'
+        with open(schema_filepath, 'r') as sf:
+            s_file: str = sf.read()
+            schema = json.loads(s_file)
+
         parsed_schema = parse_schema(schema)
 
         if not os.path.exists(data['stg_dir']):             # Creating dir if don`t exist`
